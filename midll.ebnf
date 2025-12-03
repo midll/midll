@@ -1,0 +1,46 @@
+MidllConfig = { Element } ;
+Element = Comment | Section | Assignment ;
+
+Comment = "#" { any_char_except_newline } newline ;
+
+
+Section = Identifier ":" (BraceSection | IndentSection) ;
+
+BraceSection = "{" newline { Section | Assignment | Comment } "}" newline ;
+
+(* Indentation-based section: after a colon and newline, all indented lines are part of the section *)
+IndentSection = newline { IndentedElement } ;
+IndentedElement = Indent (Section | Assignment | Comment) ;
+Indent = { " " } ; (* at least one space; adjust for tabs if needed *)
+
+Assignment = Identifier ":" Type "=" Value newline ;
+
+Identifier = letter { letter | digit | "_" | "-" | "." } ;
+
+Type = "string" | "int" | "bool" ;
+
+Value = StringValue
+      | IntegerValue
+      | BooleanValue
+      | ArrayValue
+      | ReferenceValue ;
+
+StringValue = '"' { StringChar } '"' ;
+
+StringChar = any_char_except_quote_or_newline ;
+
+IntegerValue = digit { digit } ;
+
+BooleanValue = "true" | "false" ;
+
+ArrayValue = "[" newline
+                { ArrayEntry }
+             "]" ;
+
+ArrayEntry = Identifier ":" Value newline ;
+
+ReferenceValue = "${" IdentifierPath "}" ;
+
+IdentifierPath = Identifier { "." Identifier } ;
+
+newline = ? newline character ? ;

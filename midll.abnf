@@ -1,0 +1,39 @@
+; midll-config = *(element)
+
+element         = comment / section / assignment
+
+comment         = "#" *(%x20-7E) newline
+
+
+section         = identifier ":" (brace-section / indent-section)
+
+brace-section   = "{" newline *(section / assignment / comment) "}" newline
+
+; Indentation-based section: after a colon and newline, all indented lines are part of the section
+indent-section  = newline 1*indented-element
+
+indented-element = indented (section / assignment / comment)
+indented         = 1*SP ; at least one space (or tab, if you wish to allow)
+
+assignment      = identifier ":" type "=" value newline
+
+identifier      = ALPHA *(ALPHA / DIGIT / "_" / "-" / ".")
+type            = "string" / "int" / "bool"
+
+value           = string-value / integer-value / boolean-value /
+                  array-value / reference-value
+
+string-value    = DQUOTE *string-char DQUOTE
+string-char     = %x20-21 / %x23-5B / %x5D-7E
+
+integer-value   = 1*DIGIT
+
+boolean-value   = "true" / "false"
+
+array-value     = "[" newline *(array-entry) "]"
+array-entry     = identifier ":" value newline
+
+reference-value = "${" identifier-path "}"
+identifier-path = identifier *("." identifier)
+
+newline         = %x0A / %x0D.0A

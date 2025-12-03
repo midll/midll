@@ -1,0 +1,91 @@
+# ===========================================
+# Midll Production Configuration Example
+# ===========================================
+
+project: {
+    name: string = "Production Example"
+    info: string = "Midll Production Example"
+    authors: string = [
+        name: Jade Larafey
+        email: jade@midll.com
+    ]
+    license: string = "KMIT"
+}
+
+# ---------------------------------------------------
+# Server Settings
+# ---------------------------------------------------
+server: {
+    host: string = "0.0.0.0"    # bind to all interfaces
+    port: int = 443             # standard HTTPS port 
+    enable_tls: bool = true
+}
+
+# ---------------------------------------------------
+# Database Configuration 
+# ---------------------------------------------------
+database: {
+    type: string = "postgresql"
+    host: string = "db.prod.internal"
+    port: int = 5432   # use default port if not specified
+    user: string = "prod_user"
+    pass: string = "supersecret"  # passwords should never be in configuration
+
+    pool: 
+    max_connections: int = 50
+    idle_timeout_minutes: int = 10
+
+}
+
+# ---------------------------------------------------
+# Feature Flags 
+# ---------------------------------------------------
+features: {
+    enable_cache: bool = true
+    enable_metrics: bool = true 
+    enable_beta: bool = false
+}
+
+# ---------------------------------------------------
+# Logging
+# ---------------------------------------------------
+logging: {
+    level: string = "info" # Default log level 
+    format: string = "json" # Structured logging is better for prod analysis
+    output: string = "file"
+    file: string = "/var/log/midll_app.log"
+    retention_days: int = 30
+}
+
+# ---------------------------------------------------
+# Base URIs & References
+# ---------------------------------------------------
+
+# Base URI can be referenced in other fields
+base_uri: string = "https://midll.com"
+docs_uri: string = "${base_uri}/docs"      # reference syntax
+
+api: {
+    base: string = "${base_uri}/api"       # another reference
+    v1: string = "${api.base}/v1"          # nested references
+    v2: string = "${api.base}/v2"
+}
+
+# ---------------------------------------------------
+# Config 
+# ---------------------------------------------------
+config: {
+    debug: bool = true
+    env: string = "dev" 
+}
+
+# ---------------------------------------------------
+# Dependencies (Mandate is the keyword like Json's Require)
+# ---------------------------------------------------
+mandate: {
+    midll/midll: int = 0.2.3
+}
+
+# ---------------------------------------------------
+# End of Config
+# -----------------------------------
