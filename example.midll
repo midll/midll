@@ -5,19 +5,19 @@
 project: {
     name: string = "Production Example"
     info: string = "Midll Production Example"
-    authors: record = {
+    author: record = {
         name: string = "Jade Larafey"
-        email: string = "jade@midll.com" # can use array[record] for multiple authors
+        email: string = "jade@midll.com"
     }
-    # note you wouldnt use duplicate author fields, you either use one or the other one is for a singular author and the other is for multiple.
+    # Note: Use 'author' for a single record, or 'authors' for multiple. Choose the pattern that fits your use case.
     authors: array[record] = {
         author: record = {
             name: string = "Midll Contributor 1"
-            email: string = ""
+            email: string = "contributor1@midll.com"
         }
         author: record = {
             name: string = "Midll Contributor 2"
-            email: string = ""
+            email: string = "contributor1@midll.com"
         }
     }
     license: string = "MIT"
