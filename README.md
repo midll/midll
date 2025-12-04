@@ -3,9 +3,11 @@
 Midll is a modern, human-friendly configuration language designed for clarity, structure, and explicit typing. It supports both brace-based and indentation-based sections, type annotations, references, and arrays, making it ideal for application, infrastructure, and data configuration.
 
 ## Features
-- **Explicit type annotations**: Every assignment specifies its type (`string`, `int`, `bool`).
+- **Explicit type annotations**: Every assignment specifies its type (`string`, `int`, `bool`, `record`).
+- **Typed arrays**: Use `array[type]` syntax for explicit array typing (e.g., `array[record]`, `array[string]`).
+- **Record type**: Define nested objects with the `record` type for structured data.
 - **Sections and nesting**: Use either braces `{}` or indentation for nested sections.
-- **Arrays of records**: Group related values in arrays.
+- **Arrays of records**: Group related values in typed arrays.
 - **References/interpolation**: Use `${path.to.value}` to reference other values.
 - **Comments**: Use `#` for comments.
 - **Readable and strict**: Designed for both humans and machines.
@@ -14,10 +16,12 @@ Midll is a modern, human-friendly configuration language designed for clarity, s
 ```midll
 project: {
     name: string = "Production Example"
-    authors: string = [
-        name: Jade Larafey
-        email: jade@midll.com
-    ]
+    authors: array[record] = {
+        author: record = {
+            name: string = "Jade Larafey"
+            email: string = "jade@midll.com"
+        }
+    }
 }
 
 server:

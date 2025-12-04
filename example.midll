@@ -20,7 +20,7 @@ project: {
             email: string = ""
         }
     }
-    license: string = "KMIT"
+    license: string = "MIT"
 }
 
 # ---------------------------------------------------
@@ -91,10 +91,17 @@ config: {
 }
 
 # ---------------------------------------------------
-# Dependencies (Mandate is the keyword like Json's Require)
+# Dependencies (Mandate)
 # ---------------------------------------------------
-mandate: {
-    midll/midll: int = 0.2.3
+mandate: array[record] = {
+    dependency: record = {
+        name: string = "midll/midll"
+        version: string = "0.2.3"
+    }
+    dependency: record = {
+        name: string = "vendor/package"
+        version: string = "1.0.0"
+    }
 }
 
 # ---------------------------------------------------
