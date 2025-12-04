@@ -16,13 +16,11 @@ Midll is a modern, human-friendly configuration language designed for clarity, s
 ```midll
 project: {
     name: string = "Production Example"
-    authors: array[record] = {
         author: record = {
             name: string = "Jade Larafey"
             email: string = "jade@midll.com"
         }
     }
-}
 
 server:
     host: string = "0.0.0.0"
