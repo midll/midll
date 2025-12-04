@@ -9,7 +9,7 @@ project: {
         name: string = "Jade Larafey"
         email: string = "jade@midll.com" # can use array[record] for multiple authors
     }
-    # note you wouldnt use duplicate author fields, you either use one or the other one is for singular authors and the other is for multiple.
+    # note you wouldnt use duplicate author fields, you either use one or the other one is for a singular author and the other is for multiple.
     authors: array[record] = {
         author: record = {
             name: string = "Midll Contributor 1"
