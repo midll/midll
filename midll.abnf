@@ -18,7 +18,9 @@ indented         = 1*SP ; at least one space (or tab, if you wish to allow)
 assignment      = identifier ":" type "=" value newline
 
 identifier      = ALPHA *(ALPHA / DIGIT / "_" / "-" / ".")
-type            = "string" / "int" / "bool" / "record"
+type            = "string" / "int" / "bool" / "record" / typed-array
+typed-array     = "array" "[" base-type "]"
+base-type       = "string" / "int" / "bool" / "record"
 
 value           = string-value / integer-value / boolean-value /
                   array-value / reference-value / record-value
@@ -34,7 +36,9 @@ integer-value   = 1*DIGIT
 boolean-value   = "true" / "false"
 
 array-value     = "[" newline *(array-entry) "]"
+              / "{" newline *(array-record-entry) "}" newline
 array-entry     = identifier ":" value newline
+array-record-entry = identifier ":" "record" "=" record-value
 
 reference-value = "${" identifier-path "}"
 identifier-path = identifier *("." identifier)

@@ -17,7 +17,10 @@ Assignment = Identifier ":" Type "=" Value newline ;
 
 Identifier = letter { letter | digit | "_" | "-" | "." } ;
 
-Type = "string" | "int" | "bool" | "record" ;
+Type = "string" | "int" | "bool" | "record" | TypedArray ;
+
+TypedArray = "array" "[" BaseType "]" ;
+BaseType = "string" | "int" | "bool" | "record" ;
 
 Value = StringValue
       | IntegerValue
@@ -37,11 +40,12 @@ IntegerValue = digit { digit } ;
 
 BooleanValue = "true" | "false" ;
 
-ArrayValue = "[" newline
-                { ArrayEntry }
-             "]" ;
+ArrayValue = "[" newline { ArrayEntry } "]"
+           | "{" newline { ArrayRecordEntry } "}" newline ;
 
 ArrayEntry = Identifier ":" Value newline ;
+
+ArrayRecordEntry = Identifier ":" "record" "=" RecordValue ;
 
 ReferenceValue = "${" IdentifierPath "}" ;
 
