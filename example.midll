@@ -5,10 +5,10 @@
 project: {
     name: string = "Production Example"
     info: string = "Midll Production Example"
-    authors: string = [
-        name: Jade Larafey
-        email: jade@midll.com
-    ]
+    authors: record = {
+        name: string = "Jade Larafey"
+        email: string = "jade@midll.com" # can use array[record] for multiple authors
+    }
     license: string = "KMIT"
 }
 
