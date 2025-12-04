@@ -17,13 +17,17 @@ Assignment = Identifier ":" Type "=" Value newline ;
 
 Identifier = letter { letter | digit | "_" | "-" | "." } ;
 
-Type = "string" | "int" | "bool" ;
+Type = "string" | "int" | "bool" | "record" ;
 
 Value = StringValue
       | IntegerValue
       | BooleanValue
       | ArrayValue
-      | ReferenceValue ;
+      | ReferenceValue
+      | RecordValue ;
+
+(* Record is a nested object with braces *)
+RecordValue = "{" newline { Assignment | Comment } "}" newline ;
 
 StringValue = '"' { StringChar } '"' ;
 
