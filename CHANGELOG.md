@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.3.1] - 2025-12-04
+### Changed
+- Updated example file to use `author` (singular) vs `authors` (plural) naming convention to avoid duplicate field names.
+- Improved comment clarity for single record vs array of records pattern.
+
 ## [0.3.0] - 2025-12-04
 ### Added
 - `record` type for nested objects/structures.
